@@ -13,7 +13,10 @@ enum CustomError : Error{
     case IDontLikeDrivingAround
 }
 
-func executeSomeCode(){
+// good link
+// https://www.youtube.com/watch?v=Lrc-MX8WgNc&ab_channel=SeanAllen
+
+func executeSomeCodeWithErrors(){
     do{
         let imageData = try Data(contentsOf: URL(fileURLWithPath: "myFilePath"))
         // it's safe, code below will execute
@@ -46,9 +49,30 @@ func executeSomeCode(){
         print(error)
     }
     print("We're good to go, division result \(divisionResult)")
+    
+    //
+    
+    do{
+        divisionResult = try divideNumber(initialNumber: 10, divideBy: 0)
+    }catch CustomError.DivisionByZero{
+        // do something with error
+        print("the error is \(CustomError.DivisionByZero)")
+    }catch CustomError.NegativeNumbers{
+        // do something with error
+        print("the error is \(CustomError.NegativeNumbers)")
+    }catch CustomError.IDontLikeDrivingAround{
+        // do something with error
+        print("the error is \(CustomError.IDontLikeDrivingAround)")
+    }catch{ // THIS IS IN CASE OF A DIFFERENT ERROR THAT HAS NOT BEET COVERED ABOVE
+        // do something with error
+        print("the error is \(error)")
+    }
 }
 
-// can type throws {} or throws -> Void or thows -> ()
+// can type
+// func functionName() throws {}
+// func functionName() throws -> Void{}
+// func functionName() thows -> ()
 //private func throwSomeError() throws -> Void{
 //    throw exception
 //}
