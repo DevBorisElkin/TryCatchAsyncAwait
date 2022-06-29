@@ -70,6 +70,21 @@ private func testFuncTwo(){
             await performDelayedAction(actionId: i)
         }
     }
+    // that's how Task call really looks
+    // Task(operation: () async -> _)
+    
+    var asyncOperation = {
+        for i in 0...4{
+            await performDelayedAction(actionId: i)
+        }
+    }
+    // this thing doesn't work
+    //Task(priority: .high, operation: asyncOperation)
+    
+    // doesn't work either
+//    Task(priority: .high) {
+//        await asyncOperation()
+//    }
 }
 
 private func performDelayedAction(actionId : Int) async -> Void{
