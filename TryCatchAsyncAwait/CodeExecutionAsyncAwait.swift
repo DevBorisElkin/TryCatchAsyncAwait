@@ -50,7 +50,8 @@ func chopVegetables() async -> [Vegetable]{
 //}
 
 public func executeSomeAsyncCode() {
-    testFunc()
+    //testFunc()
+    testFuncTwo()
 }
 
 private func testFunc(){
@@ -60,4 +61,22 @@ private func testFunc(){
             print("Vegetable[\(veggie.id)] is chopped[\(veggie.alreadyChopped)]")
         }
     }
+    print("Hola Hola!")
 }
+
+private func testFuncTwo(){
+    Task{
+        for i in 0...4{
+            await performDelayedAction(actionId: i)
+        }
+    }
+}
+
+private func performDelayedAction(actionId : Int) async -> Void{
+    print("Started performing delayed action with id \(actionId)")
+    Thread.sleep(forTimeInterval: 3)
+    print("Finished delayed action with id \(actionId)")
+}
+
+
+
