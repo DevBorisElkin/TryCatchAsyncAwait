@@ -15,7 +15,7 @@ class Vegetable{
         self.id = id
     }
     
-    func chopVegetable() async throws -> Vegetable{
+    func chopVegetable() async -> Vegetable{
         print("Vegetable \(id) is starting to get chopped")
         alreadyChopped = true
         Thread.sleep(forTimeInterval: 2)
@@ -28,12 +28,12 @@ func gatherRawVeggies() -> [Vegetable]{
     [Vegetable(id: 1), Vegetable(id: 2), Vegetable(id: 3)]
 }
 
-func chopVegetables() async throws -> [Vegetable]{
+func chopVegetables() async -> [Vegetable]{
     let rawVeggies = gatherRawVeggies()
     var choppedVeggies = [Vegetable]()
     
     for rawVegetable in rawVeggies{
-        choppedVeggies.append(try await rawVegetable.chopVegetable())
+        choppedVeggies.append( await rawVegetable.chopVegetable())
     }
     return choppedVeggies
 }
@@ -49,9 +49,15 @@ func chopVegetables() async throws -> [Vegetable]{
 //    }
 //}
 
-public func executeSomeAsyncCode() async {
-    let veggies = try await chopVegetables()
-    for veggie in veggies {
-        print("Vegetable[\(veggie.id)] is chopped[\(veggie.alreadyChopped)]")
+public func executeSomeAsyncCode() {
+    testFunc()
+}
+
+private func testFunc(){
+    Task{
+        let veggies = await chopVegetables()
+        for veggie in veggies {
+            print("Vegetable[\(veggie.id)] is chopped[\(veggie.alreadyChopped)]")
+        }
     }
 }
