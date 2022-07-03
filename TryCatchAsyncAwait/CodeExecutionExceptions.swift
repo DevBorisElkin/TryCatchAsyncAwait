@@ -17,7 +17,13 @@ enum CustomError : Error{
 // https://www.youtube.com/watch?v=Lrc-MX8WgNc&ab_channel=SeanAllen
 
 // we can also use try! and try? without do-try-catch block
-// try! will crash app if there's exception
+// try! will crash app if there's exception, or we will get the value that function returns
+// try? will get us optional value and it will be 'nil' or 'value' depending on whether function
+// threw exception or successfully retrieved the value
+
+// that's how you can use 'try' without do-try-catch block
+// var someData : Int? = try? calculateDidision(4, 0) // divide 4 by 0
+// var someData : Int = try! calculateDidision(4, 2) // divide 4 by 2
 
 func executeSomeCodeWithErrors(){
     do{
@@ -91,4 +97,37 @@ private func divideNumber(initialNumber: Int, divideBy : Int) throws -> Int{
     }
     
     return initialNumber / divideBy
+}
+
+
+// learning 'defer' blocks
+
+// 'defer actions' or 'defer blocks' allow you to execute some code after leaving
+// the scope where those blocks were declared
+
+// multiple defer block are executed from bottom to top, meaning the example below will
+// multiply 0 by 2 and then add to it 2, resulting in 2
+
+
+
+var attemptsCount = 0
+func tryDeferBlocks(){
+    deferBlocksInAction(someInt: 4)
+    print("attempsCount: \(attemptsCount)")
+}
+
+func deferBlocksInAction(someInt: Int){
+    defer{
+        attemptsCount += 2
+    }
+    
+    defer{
+        attemptsCount *= 2
+    }
+    
+    if(someInt == 3){
+        print("Three")
+    }else{
+        print("OtherValue")
+    }
 }

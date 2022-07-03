@@ -13,7 +13,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         //executeSomeCodeWithErrors()
-        executeSomeAsyncCode()
+        //executeSomeAsyncCode()
+        tryDeferBlocks()
     }
 
 
