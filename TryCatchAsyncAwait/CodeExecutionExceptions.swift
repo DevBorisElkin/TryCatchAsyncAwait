@@ -16,6 +16,9 @@ enum CustomError : Error{
 // good link
 // https://www.youtube.com/watch?v=Lrc-MX8WgNc&ab_channel=SeanAllen
 
+// we can also use try! and try? without do-try-catch block
+// try! will crash app if there's exception
+
 func executeSomeCodeWithErrors(){
     do{
         let imageData = try Data(contentsOf: URL(fileURLWithPath: "myFilePath"))
